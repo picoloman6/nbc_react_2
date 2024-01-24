@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",
+    "useDefineForClassFields": true,
+    "lib": ["ES2015", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": false,
+
+    // Bundler mode
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    // Linting
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "strictFunctionTypes": true,
+    "noImplicitOverride": true,
+
+    // 기타
+    "allowJs": false,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
