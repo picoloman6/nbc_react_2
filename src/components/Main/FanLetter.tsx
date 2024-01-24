@@ -17,13 +17,13 @@ const convertDate = (dateTime: number) => {
 };
 
 const FanLetter = ({ letter }: FanLetterPropsTypes) => {
-  const { name, contents, dateTime } = letter;
+  const { name, content, dateTime } = letter;
 
   return (
     <StFanLetterWrapper>
       <StFanLetterName>{name}</StFanLetterName>
       <span>{convertDate(dateTime)}</span>
-      <span>{contents}</span>
+      <span>{content}</span>
     </StFanLetterWrapper>
   );
 };

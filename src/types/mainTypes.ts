@@ -9,6 +9,6 @@ export interface LetterTypes {
   id: number;
   member: MemberTypes;
   name: string;
-  contents: string;
+  content: string;
   dateTime: number;
 }
