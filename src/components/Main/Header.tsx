@@ -1,17 +1,13 @@
 import SelectArea from './SelectArea.tsx';
-import { MemberTypes } from '../../types/mainTypes.ts';
+import { MemberStateTypes } from '../../types/mainTypes.ts';
 import { StHeaderWrapper, StHeaderTitle } from './Header.style';
 
-interface HeaderPropsTypes {
-  selected: MemberTypes;
-}
-
-const Header = ({ selected }: HeaderPropsTypes) => {
+const Header = ({ member, changeMember }: MemberStateTypes) => {
   return (
     <StHeaderWrapper>
       <StHeaderTitle>프로젝트다</StHeaderTitle>
       <br />
-      <SelectArea selected={selected} />
+      <SelectArea member={member} changeMember={changeMember} />
     </StHeaderWrapper>
   );
 };

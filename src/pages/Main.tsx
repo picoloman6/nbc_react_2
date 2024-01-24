@@ -5,10 +5,15 @@ import MainForm from '../components/Main/MainForm';
 import { MemberTypes } from '../types/mainTypes';
 
 const Main = () => {
-  const [selected] = useState<MemberTypes>('지젤');
+  const [member, setMember] = useState<MemberTypes>('지젤');
+
+  const changeMember = (newMember: MemberTypes) => {
+    setMember(newMember);
+  };
+
   return (
     <>
-      <Header selected={selected} />
+      <Header member={member} changeMember={changeMember} />
       <MainForm />
     </>
   );
