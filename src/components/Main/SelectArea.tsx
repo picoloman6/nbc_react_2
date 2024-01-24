@@ -1,11 +1,12 @@
+import { MemberTypes } from '../../types/mainTypes';
 import { StSelectWrapper, StSelectBtnWrapper } from './SelectArea.style';
 
-interface SelectBtn {
-  member: '카리나' | '윈터' | '닝닝' | '지젤';
+interface SelectBtnPropsTypes {
+  member: MemberTypes;
   selected: boolean;
 }
 
-const SelectBtn = ({ member, selected }: SelectBtn) => {
+const SelectBtn = ({ member, selected }: SelectBtnPropsTypes) => {
   return (
     <StSelectBtnWrapper selected={selected}>
       <span>{member}</span>
@@ -13,14 +14,13 @@ const SelectBtn = ({ member, selected }: SelectBtn) => {
   );
 };
 
-const SelectArea = () => {
-  type MembersType = ['카리나', '윈터', '닝닝', '지젤'];
-  const members: MembersType = ['카리나', '윈터', '닝닝', '지젤'];
+const SelectArea = ({ selected }: { selected: MemberTypes }) => {
+  const members: MemberTypes[] = ['카리나', '윈터', '닝닝', '지젤'];
 
   return (
     <StSelectWrapper>
       {members.map((v) => (
-        <SelectBtn member={v} key={v} selected={v === '카리나'} />
+        <SelectBtn member={v} key={v} selected={v === selected} />
       ))}
     </StSelectWrapper>
   );
