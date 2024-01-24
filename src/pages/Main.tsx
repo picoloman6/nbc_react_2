@@ -10,29 +10,36 @@ const dummy: LetterTypes[] = [
     id: 1,
     member: '카리나',
     name: '짱짱맨',
-    contents: '카리나팬입니다.',
-    date: new Date().getTime()
+    contents: '카리나팬입니다1111111111.',
+    dateTime: new Date().getTime()
   },
   {
     id: 2,
     member: '윈터',
     name: '짱짱맨',
-    contents: '윈터팬입니다.',
-    date: new Date().getTime()
+    contents: '윈터팬입니다111111111111111.',
+    dateTime: new Date().getTime()
   },
   {
     id: 3,
     member: '닝닝',
     name: '짱짱맨',
-    contents: '닝닝팬입니다.',
-    date: new Date().getTime()
+    contents: '닝닝팬입니다11111111111111.',
+    dateTime: new Date().getTime()
   },
   {
     id: 4,
     member: '지젤',
     name: '짱짱맨',
-    contents: '지젤팬입니다.',
-    date: new Date().getTime()
+    contents: '지젤팬입니다111111111111111111111111111.',
+    dateTime: new Date().getTime()
+  },
+  {
+    id: 5,
+    member: '카리나',
+    name: '짱짱맨',
+    contents: '지젤팬입니다111111111111111111111111111.',
+    dateTime: new Date().getTime()
   }
 ];
 
@@ -47,12 +54,16 @@ const Main = () => {
   return (
     <>
       <Header member={member} changeMember={changeMember} />
-      <MainForm />
-      {letters.reduce(
-        (acc: ReactElement[], cur) =>
-          cur.member === member ? [...acc, <FanLetter letter={cur} />] : acc,
-        []
-      )}
+      <main>
+        <MainForm />
+        {letters.reduce(
+          (acc: ReactElement[], cur) =>
+            cur.member === member
+              ? [...acc, <FanLetter key={cur.id} letter={cur} />]
+              : acc,
+          []
+        )}
+      </main>
     </>
   );
 };

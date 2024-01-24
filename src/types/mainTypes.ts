@@ -10,5 +10,5 @@ export interface LetterTypes {
   member: MemberTypes;
   name: string;
   contents: string;
-  date: number;
+  dateTime: number;
 }

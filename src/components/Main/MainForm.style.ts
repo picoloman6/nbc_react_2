@@ -7,8 +7,8 @@ export const StForm = styled('form', {
   width: '30rem',
   height: '17rem',
   background: 'Violet',
-  margin: '0 auto',
-  padding: '1rem'
+  padding: '1rem',
+  marginTop: '1rem'
 });
 
 export const StFormTitle = styled('h3', {
