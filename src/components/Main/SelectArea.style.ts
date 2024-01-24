@@ -20,5 +20,13 @@ export const StSelectBtnWrapper = styled('div', {
   width: '20%',
   height: '75%',
   border: '1px solid black',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  variants: {
+    selected: {
+      true: {
+        background: 'Blue',
+        color: 'White'
+      }
+    }
+  }
 });
