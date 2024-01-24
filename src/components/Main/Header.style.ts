@@ -2,6 +2,7 @@ import { styled } from '@stitches/react';
 
 export const StHeaderWrapper = styled('div', {
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'center',
   alignItems: 'center',
   width: '100%',
