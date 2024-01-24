@@ -9,6 +9,7 @@ const flex = {
 export const StSelectWrapper = styled('div', {
   ...flex,
   width: '50%',
+  maxWidth: '43rem',
   height: '20%',
   border: '1px solid black',
   marginTop: '5rem',
