@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useState, useRef } from 'react';
 
 import Header from '../components/Main/Header';
 import MainForm from '../components/Main/MainForm';
@@ -45,17 +45,28 @@ const dummy: LetterTypes[] = [
 
 const Main = () => {
   const [member, setMember] = useState<MemberTypes>('카리나');
-  const [letters] = useState<LetterTypes[]>(dummy);
+  const [letters, setLetters] = useState<LetterTypes[]>(dummy);
+  const id = useRef(letters[letters.length - 1].id);
 
   const changeMember = (newMember: MemberTypes) => {
     setMember(newMember);
+  };
+
+  const addLetters = (input: { name: string; content: string }) => {
+    const newLetter: LetterTypes = {
+      id: ++id.current,
+      member,
+      dateTime: new Date().getTime(),
+      ...input
+    };
+    setLetters((prev) => [...prev, newLetter]);
   };
 
   return (
     <>
       <Header member={member} changeMember={changeMember} />
       <main>
-        <MainForm />
+        <MainForm member={member} addLetters={addLetters} />
         {letters.reduce(
           (acc: ReactElement[], cur) =>
             cur.member === member

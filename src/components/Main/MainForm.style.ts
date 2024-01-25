@@ -30,3 +30,17 @@ export const StFormBtn = styled('button', {
   height: '2rem',
   margin: '0 auto'
 });
+
+export const StErrMsg = styled('span', {
+  marginLeft: '0.5rem',
+  fontSize: '0.9rem',
+  fontWeight: 'bold',
+  color: 'Violet',
+  variants: {
+    err: {
+      true: {
+        color: 'Red'
+      }
+    }
+  }
+});
