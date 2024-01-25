@@ -49,7 +49,7 @@ const Main = () => {
   const id = useRef(letters[letters.length - 1].id);
 
   const changeMember = (newMember: MemberTypes) => {
-    setMember(newMember);
+    setMember(() => newMember);
   };
 
   const addLetters = (input: { name: string; content: string }) => {

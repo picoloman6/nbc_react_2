@@ -20,31 +20,34 @@ const MainForm = ({ addLetters, member }: MainFormPropsTypes) => {
     name: '',
     content: ''
   });
-  const [errMsg, setErrMsg] = useState<'' | 'name' | 'content'>('');
+  const [errMsg, setErrMsg] = useState<{
+    type: '' | 'name' | 'content';
+    msg: string;
+  }>({ type: '', msg: '' });
 
   const onChangeForm = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setInput({ ...input, [name]: value });
+    setInput((prev) => ({ ...prev, [name]: value }));
   };
 
   const onClickForm = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (input.name === '') {
-      setErrMsg('name');
+      setErrMsg(() => ({ type: 'name', msg: '이름을 입력하세요.' }));
       return;
     }
 
     if (input.content === '') {
-      setErrMsg('content');
+      setErrMsg(() => ({ type: 'content', msg: '내용을을 입력하세요.' }));
       return;
     }
 
     addLetters(input);
-    setInput({ name: '', content: '' });
-    setErrMsg('');
+    setInput(() => ({ name: '', content: '' }));
+    setErrMsg(() => ({ type: '', msg: '' }));
   };
 
   return (
@@ -52,7 +55,7 @@ const MainForm = ({ addLetters, member }: MainFormPropsTypes) => {
       <StFormTitle>현재 {member}에게 보내고 있습니다</StFormTitle>
       <div>
         <label htmlFor='main-form-name'>닉네임</label>
-        <StErrMsg err={'name' === errMsg}>어아ㅓ이ㅏㅓ이ㅓ이</StErrMsg>
+        <StErrMsg>{errMsg.type === 'name' ? errMsg.msg : ''}</StErrMsg>
       </div>
       <StFormInput
         id='main-form-name'
@@ -65,7 +68,7 @@ const MainForm = ({ addLetters, member }: MainFormPropsTypes) => {
       />
       <div>
         <label htmlFor='main-form-content'>내용</label>
-        <StErrMsg err={'content' === errMsg}>어아ㅓ이ㅏㅓ이ㅓ이</StErrMsg>
+        <StErrMsg>{errMsg.type === 'content' ? errMsg.msg : ''}</StErrMsg>
       </div>
       <StFormTextArea
         id='main-form-content'
