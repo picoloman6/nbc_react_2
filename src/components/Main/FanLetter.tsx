@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { LetterTypes } from '../../types/mainTypes';
 import { StFanLetterWrapper, StFanLetterName } from './FanLetter.style';
 
@@ -17,14 +18,16 @@ const convertDate = (dateTime: number) => {
 };
 
 const FanLetter = ({ letter }: FanLetterPropsTypes) => {
-  const { name, content, dateTime } = letter;
+  const { id, name, content, dateTime } = letter;
 
   return (
-    <StFanLetterWrapper>
-      <StFanLetterName>{name}</StFanLetterName>
-      <span>{convertDate(dateTime)}</span>
-      <span>{content}</span>
-    </StFanLetterWrapper>
+    <Link to={`/detail?id=${id}`}>
+      <StFanLetterWrapper>
+        <StFanLetterName>{name}</StFanLetterName>
+        <span>{convertDate(dateTime)}</span>
+        <span>{content}</span>
+      </StFanLetterWrapper>
+    </Link>
   );
 };
 
