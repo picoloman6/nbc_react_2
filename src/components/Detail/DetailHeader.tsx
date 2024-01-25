@@ -1,8 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
-import { StDetailHeader, StGoBackBtn } from './DetailHeader.style';
+import {
+  StDetailHeader,
+  StGoBackBtn,
+  StDetailHeaderName
+} from './DetailHeader.style';
 
-const DetailHeader = () => {
+const DetailHeader = ({ name }: { name: string }) => {
   const navigate = useNavigate();
 
   const onClickGoBack = () => {
@@ -12,6 +16,7 @@ const DetailHeader = () => {
   return (
     <StDetailHeader>
       <StGoBackBtn onClick={onClickGoBack}>돌아가기</StGoBackBtn>
+      <StDetailHeaderName>From.{name}</StDetailHeaderName>
     </StDetailHeader>
   );
 };
