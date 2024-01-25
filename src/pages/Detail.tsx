@@ -11,7 +11,7 @@ const Detail = () => {
   useEffect(() => {
     console.log(state);
     window.scrollTo(0, 0);
-  }, []);
+  }, [state]);
 
   console.log(queryId);
 

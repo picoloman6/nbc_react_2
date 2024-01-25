@@ -20,6 +20,7 @@ const MainForm = ({ addLetters, member }: MainFormPropsTypes) => {
     name: '',
     content: ''
   });
+
   const [errMsg, setErrMsg] = useState<{
     type: '' | 'name' | 'content';
     msg: string;
