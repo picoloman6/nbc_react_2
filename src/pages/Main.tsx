@@ -1,9 +1,10 @@
-import { ReactElement, useState, useRef } from 'react';
+import { ReactElement, useState, useRef, useContext } from 'react';
 
 import Header from '../components/Main/Header';
 import MainForm from '../components/Main/MainForm';
 import FanLetter from '../components/Main/FanLetter';
-import { MemberTypes, LetterTypes } from '../types/mainTypes';
+import { MemberContext } from '../store/Context';
+import { LetterTypes } from '../types/mainTypes';
 
 const dummy: LetterTypes[] = [
   {
@@ -44,13 +45,9 @@ const dummy: LetterTypes[] = [
 ];
 
 const Main = () => {
-  const [member, setMember] = useState<MemberTypes>('카리나');
+  const { member, changeMember } = useContext(MemberContext);
   const [letters, setLetters] = useState<LetterTypes[]>(dummy);
   const id = useRef(letters[letters.length - 1].id);
-
-  const changeMember = (newMember: MemberTypes) => {
-    setMember(() => newMember);
-  };
 
   const addLetters = (input: { name: string; content: string }) => {
     const newLetter: LetterTypes = {
