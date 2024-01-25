@@ -29,7 +29,9 @@ const FanLetter = ({ letter }: FanLetterPropsTypes) => {
     <StFanLetterWrapper onClick={onClickDetail}>
       <StFanLetterName>{name}</StFanLetterName>
       <span>{convertDate(dateTime)}</span>
-      <span>{content}</span>
+      <span>
+        {content.length > 35 ? `${content.slice(0, 35)}...` : content}
+      </span>
     </StFanLetterWrapper>
   );
 };
