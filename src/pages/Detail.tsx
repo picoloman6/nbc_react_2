@@ -1,14 +1,12 @@
 import { useEffect } from 'react';
-import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import DetailHeader from '../components/Detail/DetailHeader';
 import DetailLetter from '../components/Detail/DetailLetter';
 
 const Detail = () => {
-  const [searchParams] = useSearchParams();
   const { state } = useLocation();
   const navigate = useNavigate();
-  const queryId = searchParams.get('id');
 
   useEffect(() => {
     if (state === null) {
@@ -17,8 +15,6 @@ const Detail = () => {
     }
     window.scrollTo(0, 0);
   }, [state, navigate]);
-
-  console.log(queryId);
 
   return (
     <>
