@@ -1,5 +1,10 @@
-import { Dispatch, ThunkAction } from '@reduxjs/toolkit';
-import { ActionType, createAsyncAction, createReducer } from 'typesafe-actions';
+import { ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
+import {
+  Action,
+  ActionType,
+  createAsyncAction,
+  createReducer
+} from 'typesafe-actions';
 
 import { LetterTypes } from '../types/mainTypes';
 import { RootState } from '.';
@@ -15,13 +20,13 @@ const getDataAsync = createAsyncAction(
   GET_DATA_FAILURE
 )<undefined, LetterTypes[], Error | unknown>();
 
-export interface LettersStateTypes {
+interface LettersStateTypes {
   loading: boolean;
   err: Error | null;
   letters: LetterTypes[];
 }
 
-export type ActionTypes = ActionType<typeof getDataAsync>;
+type ActionTypes = ActionType<typeof getDataAsync>;
 
 type getLettersThunkType = ThunkAction<
   void,
@@ -31,7 +36,8 @@ type getLettersThunkType = ThunkAction<
 >;
 
 export const getLettersThunk =
-  (): getLettersThunkType => async (dispatch: Dispatch) => {
+  (): getLettersThunkType =>
+  async (dispatch: ThunkDispatch<RootState, null, Action>) => {
     const { request, success, failure } = getDataAsync;
     dispatch(request());
     try {

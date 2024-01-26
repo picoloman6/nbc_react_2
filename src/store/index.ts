@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { combineReducers } from 'redux';
+import { ThunkDispatch, configureStore } from '@reduxjs/toolkit';
+import { Action, combineReducers } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 
 import lettersReducer from './fanLetters';
@@ -20,5 +20,7 @@ type AppDispatch = typeof store.dispatch;
 // 타입을 적용한 useSelector와 useDispatch
 export const useAppSelector = useSelector.withTypes<RootState>();
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
+export const useThunkDispatch =
+  useDispatch.withTypes<ThunkDispatch<RootState, null, Action>>();
 
 export default store;
