@@ -5,7 +5,7 @@ export const getFanLetters = async () => {
   try {
     const comment = query(
       collection(db, 'fan-letters'),
-      orderBy('date', 'desc')
+      orderBy('dateTime', 'desc')
     );
     const res = await getDocs(comment);
     const data = res.docs.map((v) => {

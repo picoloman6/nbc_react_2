@@ -11,11 +11,10 @@ import {
 } from './MainForm.style';
 
 interface MainFormPropsTypes {
-  addLetters: (input: { name: string; content: string }) => void;
   member: MemberTypes;
 }
 
-const MainForm = ({ addLetters, member }: MainFormPropsTypes) => {
+const MainForm = ({ member }: MainFormPropsTypes) => {
   const [input, setInput] = useState<{ name: string; content: string }>({
     name: '',
     content: ''
@@ -46,7 +45,6 @@ const MainForm = ({ addLetters, member }: MainFormPropsTypes) => {
       return;
     }
 
-    addLetters(input);
     setInput(() => ({ name: '', content: '' }));
     setErrMsg(() => ({ type: '', msg: '' }));
   };

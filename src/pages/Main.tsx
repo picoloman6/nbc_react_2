@@ -8,26 +8,27 @@ import { getLettersThunk } from '../store/fanLetters';
 import { RootState, useAppSelector, useThunkDispatch } from '../store';
 
 const Main = () => {
-  const { member, changeMember, addLetters } = useContext(MemberContext);
+  const { member, changeMember } = useContext(MemberContext);
   const dispatch = useThunkDispatch();
   const letters = useAppSelector((state: RootState) => state.letters.letters);
 
   useEffect(() => {
     dispatch(getLettersThunk());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
       <Header member={member} changeMember={changeMember} />
       <main>
-        <MainForm member={member} addLetters={addLetters} />
-        {letters.reduce(
-          (acc: ReactElement[], cur) =>
-            cur.member === member
-              ? [...acc, <FanLetter key={cur.id} letter={cur} />]
-              : acc,
-          []
-        )}
+        <MainForm member={member} />
+        {letters.length > 0 &&
+          letters.reduce(
+            (acc: ReactElement[], cur) =>
+              cur.member === member
+                ? [...acc, <FanLetter key={cur.id} letter={cur} />]
+                : acc,
+            []
+          )}
       </main>
     </>
   );
