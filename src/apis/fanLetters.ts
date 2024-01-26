@@ -1,5 +1,11 @@
 import db from './firestore';
-import { getDocs, query, collection, orderBy } from 'firebase/firestore/lite';
+import {
+  getDocs,
+  addDoc,
+  query,
+  collection,
+  orderBy
+} from 'firebase/firestore/lite';
 
 export const getFanLetters = async () => {
   try {
@@ -15,6 +21,18 @@ export const getFanLetters = async () => {
     });
 
     return data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const postFanLetters = async (
+  letterInput: { name: string; content: string },
+  member: string
+) => {
+  try {
+    const letter = { ...letterInput, member, dateTime: new Date() };
+    await addDoc(collection(db, 'fan-letters'), letter);
   } catch (e) {
     console.log(e);
   }
