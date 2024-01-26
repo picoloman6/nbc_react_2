@@ -21,8 +21,6 @@ const FanLetter = ({ letter }: FanLetterPropsTypes) => {
   const navigate = useNavigate();
   const { id, name, content, dateTime } = letter;
 
-  console.log(dateTime, typeof dateTime);
-
   const onClickDetail = () => {
     navigate(`/detail?id=${id}`, { state: letter });
   };

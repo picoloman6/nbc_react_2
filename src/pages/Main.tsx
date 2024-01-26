@@ -10,7 +10,7 @@ import { RootState, useAppSelector, useThunkDispatch } from '../store';
 const Main = () => {
   const { member, changeMember } = useContext(MemberContext);
   const dispatch = useThunkDispatch();
-  const letters = useAppSelector((state: RootState) => state.letters.letters);
+  const data = useAppSelector((state: RootState) => state.letters);
 
   useEffect(() => {
     dispatch(getLettersThunk());
@@ -21,8 +21,8 @@ const Main = () => {
       <Header member={member} changeMember={changeMember} />
       <main>
         <MainForm member={member} />
-        {letters.length > 0 &&
-          letters.reduce(
+        {!data.loading &&
+          data.letters.reduce(
             (acc: ReactElement[], cur) =>
               cur.member === member
                 ? [...acc, <FanLetter key={cur.id} letter={cur} />]
