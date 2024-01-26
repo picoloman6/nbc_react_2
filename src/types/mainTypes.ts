@@ -12,6 +12,6 @@ export interface LetterInputTypes {
 }
 
 export interface LetterTypes extends LetterInputTypes {
-  id: number;
+  id: string;
   dateTime: number;
 }

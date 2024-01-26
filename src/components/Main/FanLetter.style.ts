@@ -8,7 +8,7 @@ export const StFanLetterWrapper = styled('div', {
   height: '8rem',
   background: 'Gray',
   padding: '1rem',
-  marginTop: '1.5rem',
+  margin: '1rem',
   cursor: 'pointer'
 });
 
