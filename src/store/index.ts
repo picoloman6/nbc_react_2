@@ -2,8 +2,10 @@ import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 
+import lettersReducer from './fanLetters';
+
 const rootReducer = combineReducers({
-  todos: {}
+  letters: lettersReducer
 });
 
 // 최상위 컴포넌트에서 사용
@@ -12,7 +14,7 @@ const store = configureStore({
 });
 
 // useSelector와 useDispatch의 타입
-type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof store.getState>;
 type AppDispatch = typeof store.dispatch;
 
 // 타입을 적용한 useSelector와 useDispatch
