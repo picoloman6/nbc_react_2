@@ -1,36 +1,24 @@
 import { ThunkAction, ThunkDispatch } from '@reduxjs/toolkit';
 import {
-  Action,
   ActionType,
+  Action,
   createAsyncAction,
   createReducer
 } from 'typesafe-actions';
 
-import { LetterInputTypes, LetterTypes } from '../types/mainTypes';
-import { getFanLetters, postFanLetters } from '../apis/fanLetters';
+import { LetterTypes } from '../types/mainTypes';
+import { getFanLetters } from '../apis/fanLetters';
 import { RootState } from '.';
-import { makeActions } from './common';
 
-const [GET_DATA, GET_DATA_SUCCESS, GET_DATA_FAILURE] = makeActions(
-  'fanLetters',
-  'get'
-);
-const [POST_DATA, POST_DATA_SUCCESS, POST_DATA_FAILURE] = makeActions(
-  'fanLetters',
-  'post'
-);
+const GET_DATA = 'fanLetters/GET_DATA';
+const GET_DATA_SUCCESS = 'fanLetters/GET_DATA_SUCCESS';
+const GET_DATA_FAILURE = 'fanLetters/GET_DATA_FAILURE';
 
 const getDataAsync = createAsyncAction(
   GET_DATA,
   GET_DATA_SUCCESS,
   GET_DATA_FAILURE
 )<undefined, LetterTypes[], Error | unknown>();
-
-const postDataAsync = createAsyncAction(
-  POST_DATA,
-  POST_DATA_SUCCESS,
-  POST_DATA_FAILURE
-)<undefined, void, Error | unknown>();
 
 interface LettersStateTypes {
   loading: boolean;
@@ -40,19 +28,7 @@ interface LettersStateTypes {
 
 type ActionTypes = ActionType<typeof getDataAsync>;
 
-type getLettersThunkTypes = ThunkAction<
-  void,
-  RootState,
-  null,
-  ActionType<typeof getDataAsync>
->;
-
-type postLettersThunkTypes = ThunkAction<
-  void,
-  RootState,
-  null,
-  ActionType<typeof postDataAsync>
->;
+type getLettersThunkTypes = ThunkAction<void, RootState, null, ActionTypes>;
 
 export const getLettersThunk =
   (): getLettersThunkTypes =>
@@ -60,20 +36,6 @@ export const getLettersThunk =
     const { request, success, failure } = getDataAsync;
     dispatch(request());
     try {
-      const letters = (await getFanLetters()) as LetterTypes[];
-      dispatch(success(letters));
-    } catch (e) {
-      dispatch(failure(e));
-    }
-  };
-
-export const postLettersThunk =
-  (input: LetterInputTypes): postLettersThunkTypes =>
-  async (dispatch: ThunkDispatch<RootState, null, Action>) => {
-    const { request, success, failure } = getDataAsync;
-    dispatch(request());
-    try {
-      await postFanLetters(input);
       const letters = (await getFanLetters()) as LetterTypes[];
       dispatch(success(letters));
     } catch (e) {

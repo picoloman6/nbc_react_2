@@ -30,7 +30,7 @@ export const getFanLetters = async () => {
 
 export const postFanLetters = async (input: LetterInputTypes) => {
   try {
-    const letter = { ...input, dateTime: new Date() };
+    const letter = { ...input, dateTime: new Date().getTime() };
     await addDoc(collection(db, 'fan-letters'), letter);
   } catch (e) {
     console.log(e);

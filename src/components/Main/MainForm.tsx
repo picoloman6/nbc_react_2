@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
 import { MemberTypes } from '../../types/mainTypes';
+import { getLettersThunk } from '../../store/fanLetters';
+import { useThunkDispatch } from '../../store';
+import { postFanLetters } from '../../apis/fanLetters';
 import {
   StForm,
   StFormTitle,
@@ -15,6 +18,7 @@ interface MainFormPropsTypes {
 }
 
 const MainForm = ({ member }: MainFormPropsTypes) => {
+  const dispatch = useThunkDispatch();
   const [input, setInput] = useState<{ name: string; content: string }>({
     name: '',
     content: ''
@@ -32,18 +36,23 @@ const MainForm = ({ member }: MainFormPropsTypes) => {
     setInput((prev) => ({ ...prev, [name]: value }));
   };
 
-  const onClickForm = (e: React.FormEvent) => {
+  const onClickForm = async (e: React.FormEvent) => {
+    const { name, content } = input;
     e.preventDefault();
 
-    if (input.name === '') {
+    if (name === '') {
       setErrMsg(() => ({ type: 'name', msg: '이름을 입력하세요.' }));
       return;
     }
 
-    if (input.content === '') {
+    if (content === '') {
       setErrMsg(() => ({ type: 'content', msg: '내용을을 입력하세요.' }));
       return;
     }
+
+    await postFanLetters({ name, content, member });
+
+    dispatch(getLettersThunk());
 
     setInput(() => ({ name: '', content: '' }));
     setErrMsg(() => ({ type: '', msg: '' }));
