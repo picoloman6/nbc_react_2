@@ -5,10 +5,13 @@ export interface MemberStateTypes {
   changeMember: (member: MemberTypes) => void;
 }
 
-export interface LetterTypes {
-  id: number;
-  member: MemberTypes;
+export interface LetterInputTypes {
   name: string;
   content: string;
+  member: string;
+}
+
+export interface LetterTypes extends LetterInputTypes {
+  id: number;
   dateTime: number;
 }

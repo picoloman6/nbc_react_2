@@ -6,19 +6,31 @@ import {
   createReducer
 } from 'typesafe-actions';
 
-import { LetterTypes } from '../types/mainTypes';
+import { LetterInputTypes, LetterTypes } from '../types/mainTypes';
+import { getFanLetters, postFanLetters } from '../apis/fanLetters';
 import { RootState } from '.';
-import { getFanLetters } from '../apis/fanLetters';
+import { makeActions } from './common';
 
-const GET_DATA = 'fanLetters/GET_DATA';
-const GET_DATA_SUCCESS = 'fanLetters/GET_DATA_SUCCESS';
-const GET_DATA_FAILURE = 'fanLetters/GET_DATA_FAILURE';
+const [GET_DATA, GET_DATA_SUCCESS, GET_DATA_FAILURE] = makeActions(
+  'fanLetters',
+  'get'
+);
+const [POST_DATA, POST_DATA_SUCCESS, POST_DATA_FAILURE] = makeActions(
+  'fanLetters',
+  'post'
+);
 
 const getDataAsync = createAsyncAction(
   GET_DATA,
   GET_DATA_SUCCESS,
   GET_DATA_FAILURE
 )<undefined, LetterTypes[], Error | unknown>();
+
+const postDataAsync = createAsyncAction(
+  POST_DATA,
+  POST_DATA_SUCCESS,
+  POST_DATA_FAILURE
+)<undefined, void, Error | unknown>();
 
 interface LettersStateTypes {
   loading: boolean;
@@ -28,19 +40,40 @@ interface LettersStateTypes {
 
 type ActionTypes = ActionType<typeof getDataAsync>;
 
-type getLettersThunkType = ThunkAction<
+type getLettersThunkTypes = ThunkAction<
   void,
   RootState,
   null,
   ActionType<typeof getDataAsync>
 >;
 
+type postLettersThunkTypes = ThunkAction<
+  void,
+  RootState,
+  null,
+  ActionType<typeof postDataAsync>
+>;
+
 export const getLettersThunk =
-  (): getLettersThunkType =>
+  (): getLettersThunkTypes =>
   async (dispatch: ThunkDispatch<RootState, null, Action>) => {
     const { request, success, failure } = getDataAsync;
     dispatch(request());
     try {
+      const letters = (await getFanLetters()) as LetterTypes[];
+      dispatch(success(letters));
+    } catch (e) {
+      dispatch(failure(e));
+    }
+  };
+
+export const postLettersThunk =
+  (input: LetterInputTypes): postLettersThunkTypes =>
+  async (dispatch: ThunkDispatch<RootState, null, Action>) => {
+    const { request, success, failure } = getDataAsync;
+    dispatch(request());
+    try {
+      await postFanLetters(input);
       const letters = (await getFanLetters()) as LetterTypes[];
       dispatch(success(letters));
     } catch (e) {
