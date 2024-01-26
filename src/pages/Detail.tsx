@@ -19,9 +19,7 @@ const Detail = () => {
   return (
     <>
       <DetailHeader name={state.name} />
-      <main>
-        <DetailLetter content={state.content} />
-      </main>
+      <DetailLetter content={state.content} />
     </>
   );
 };

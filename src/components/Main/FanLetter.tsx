@@ -27,7 +27,7 @@ const FanLetter = ({ letter }: FanLetterPropsTypes) => {
   const navigate = useNavigate();
   const { id, name, content, dateTime } = letter;
 
-  const onClickDetail = (e: React.MouseEvent<HTMLDivElement>) => {
+  const onClickDetail = (e: React.MouseEvent<HTMLLIElement>) => {
     const { tagName } = e.target as Element;
 
     if (tagName !== 'BUTTON') {

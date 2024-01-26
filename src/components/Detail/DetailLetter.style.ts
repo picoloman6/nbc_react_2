@@ -6,6 +6,7 @@ export const StDetailLetterWrapper = styled('div', {
   background: 'AntiqueWhite',
   border: '3px solid Violet',
   padding: '1rem',
+  margin: '0 auto',
   marginTop: '1rem',
   overflow: 'auto'
 });

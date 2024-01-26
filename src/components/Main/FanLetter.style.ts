@@ -1,6 +1,6 @@
 import { styled } from '@stitches/react';
 
-export const StFanLetterWrapper = styled('div', {
+export const StFanLetterWrapper = styled('li', {
   display: 'flex',
   justifyContent: 'space-around',
   flexDirection: 'column',

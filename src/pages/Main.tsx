@@ -23,8 +23,8 @@ const Main = ({ member, changeMember }: MainPropsTypes) => {
   return (
     <>
       <Header member={member} changeMember={changeMember} />
-      <main>
-        <MainForm member={member} />
+      <MainForm member={member} />
+      <ul>
         {!data.loading &&
           data.letters.reduce(
             (acc: ReactElement[], cur) =>
@@ -33,7 +33,7 @@ const Main = ({ member, changeMember }: MainPropsTypes) => {
                 : acc,
             []
           )}
-      </main>
+      </ul>
     </>
   );
 };
