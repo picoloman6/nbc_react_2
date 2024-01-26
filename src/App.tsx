@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Main from './pages/Main';
-import Detail from './pages/Detail';
 import NotFound from './pages/NotFound';
 import { MemberTypes } from './types/mainTypes';
 import './index.css';
+
+const Detail = React.lazy(() => import('./pages/Detail'));
 
 const App = () => {
   const [member, setMember] = useState<MemberTypes>('카리나');
@@ -15,18 +16,18 @@ const App = () => {
   };
 
   return (
-    <>
-      <BrowserRouter>
+    <BrowserRouter>
+      <React.Suspense>
         <Routes>
           <Route
             path='/'
             element={<Main member={member} changeMember={changeMember} />}
           />
           <Route path='/detail' element={<Detail />} />
-          <Route path='/*' element={<NotFound />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
-      </BrowserRouter>
-    </>
+      </React.Suspense>
+    </BrowserRouter>
   );
 };
 
