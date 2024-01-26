@@ -1,14 +1,18 @@
-import { ReactElement, useContext, useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 
 import Header from '../components/Main/Header';
 import MainForm from '../components/Main/MainForm';
 import FanLetter from '../components/Main/FanLetter';
-import { MemberContext } from '../store/Context';
 import { getLettersThunk } from '../store/fanLetters';
 import { RootState, useAppSelector, useThunkDispatch } from '../store';
+import { MemberTypes } from '../types/mainTypes';
 
-const Main = () => {
-  const { member, changeMember } = useContext(MemberContext);
+interface MainPropsTypes {
+  member: MemberTypes;
+  changeMember: (newMember: MemberTypes) => void;
+}
+
+const Main = ({ member, changeMember }: MainPropsTypes) => {
   const dispatch = useThunkDispatch();
   const data = useAppSelector((state: RootState) => state.letters);
 
