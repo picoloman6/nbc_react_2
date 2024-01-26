@@ -1,9 +1,11 @@
 import {
   getDocs,
   addDoc,
+  deleteDoc,
   query,
   collection,
-  orderBy
+  orderBy,
+  doc
 } from 'firebase/firestore/lite';
 
 import db from './firestore';
@@ -32,6 +34,14 @@ export const postFanLetters = async (input: LetterInputTypes) => {
   try {
     const letter = { ...input, dateTime: new Date().getTime() };
     await addDoc(collection(db, 'fan-letters'), letter);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const deleteFanLetter = async (id: string) => {
+  try {
+    await deleteDoc(doc(db, 'fan-letters', id));
   } catch (e) {
     console.log(e);
   }

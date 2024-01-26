@@ -1,4 +1,9 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { deleteFanLetter } from '../../apis/fanLetters';
+import { getLettersThunk } from '../../store/fanLetters';
+import { useThunkDispatch } from '../../store';
 import { LetterTypes } from '../../types/mainTypes';
 import { StFanLetterWrapper, StFanLetterName } from './FanLetter.style';
 
@@ -18,11 +23,21 @@ const convertDate = (dateTime: number) => {
 };
 
 const FanLetter = ({ letter }: FanLetterPropsTypes) => {
+  const dipatch = useThunkDispatch();
   const navigate = useNavigate();
   const { id, name, content, dateTime } = letter;
 
-  const onClickDetail = () => {
-    navigate(`/detail?id=${id}`, { state: letter });
+  const onClickDetail = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { tagName } = e.target as Element;
+
+    if (tagName !== 'BUTTON') {
+      navigate(`/detail?id=${id}`, { state: letter });
+    }
+  };
+
+  const onClickDelete = async (id: string) => {
+    await deleteFanLetter(id);
+    dipatch(getLettersThunk());
   };
 
   return (
@@ -32,6 +47,7 @@ const FanLetter = ({ letter }: FanLetterPropsTypes) => {
       <span>
         {content.length > 35 ? `${content.slice(0, 35)}...` : content}
       </span>
+      <button onClick={() => onClickDelete(id)}>삭제</button>
     </StFanLetterWrapper>
   );
 };
