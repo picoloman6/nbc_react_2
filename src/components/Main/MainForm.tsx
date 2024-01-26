@@ -17,7 +17,7 @@ interface MainFormPropsTypes {
   member: MemberTypes;
 }
 
-const MainForm = React.memo(({ member }: MainFormPropsTypes) => {
+const MainForm = ({ member }: MainFormPropsTypes) => {
   const dispatch = useThunkDispatch();
   const [input, setInput] = useState<{ name: string; content: string }>({
     name: '',
@@ -88,6 +88,6 @@ const MainForm = React.memo(({ member }: MainFormPropsTypes) => {
       <StFormBtn> 제출</StFormBtn>
     </StForm>
   );
-});
+};
 
 export default MainForm;

@@ -24,7 +24,7 @@ const Main = ({ member, changeMember }: MainPropsTypes) => {
     <>
       <Header member={member} changeMember={changeMember} />
       <MainForm member={member} />
-      <ul>
+      <ul style={{ width: '30%', margin: '0 auto' }}>
         {!data.loading &&
           data.letters.reduce(
             (acc: ReactElement[], cur) =>
