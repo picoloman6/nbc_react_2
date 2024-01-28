@@ -18,7 +18,7 @@ const getDataAsync = createAsyncAction(
   GET_DATA,
   GET_DATA_SUCCESS,
   GET_DATA_FAILURE
-)<undefined, LetterTypes[], Error | unknown>();
+)<undefined, LetterTypes[], unknown>();
 
 interface LettersStateTypes {
   loading: boolean;
