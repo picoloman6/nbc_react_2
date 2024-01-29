@@ -5,7 +5,11 @@ import { deleteFanLetter } from '../../apis/fanLetters';
 import { getLettersThunk } from '../../store/fanLetters';
 import { useThunkDispatch } from '../../store';
 import { LetterTypes } from '../../types/mainTypes';
-import { StFanLetterWrapper, StFanLetterName } from './FanLetter.style';
+import {
+  StFanLetterWrapper,
+  StFanLetterName,
+  StDeleteBtn
+} from './FanLetter.style';
 
 interface FanLetterPropsTypes {
   letter: LetterTypes;
@@ -47,7 +51,7 @@ const FanLetter = ({ letter }: FanLetterPropsTypes) => {
       <span>
         {content.length > 35 ? `${content.slice(0, 35)}...` : content}
       </span>
-      <button onClick={() => onClickDelete(id)}>삭제</button>
+      <StDeleteBtn onClick={() => onClickDelete(id)}>삭제</StDeleteBtn>
     </StFanLetterWrapper>
   );
 };
