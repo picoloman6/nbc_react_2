@@ -8,7 +8,7 @@ import DetailHeader from '../components/Detail/DetailHeader';
 import DetailLetter from '../components/Detail/DetailLetter';
 import DetailUpdateArea from '../components/Detail/DetailUpdateArea';
 import DetailBtns from '../components/Detail/Detailbtns';
-import { letterLengthLimit } from '../constants';
+import { letterLenLimit } from '../constants';
 
 const Detail = () => {
   const dipatch = useThunkDispatch();
@@ -28,14 +28,14 @@ const Detail = () => {
   };
 
   const onClickUpdate = async () => {
-    const { min, max } = letterLengthLimit;
+    const { min, max } = letterLenLimit;
     if (state.content === newContent) {
       setErrMsg(() => '수정된 내용이 없습니다.');
       return;
     }
 
     if (newContent.length < min || newContent.length > max) {
-      setErrMsg(() => `${min}자 이상 ${max}자 이하로 입력하세요.`);
+      setErrMsg(() => letterLenLimit.getErrMsg());
       return;
     }
 

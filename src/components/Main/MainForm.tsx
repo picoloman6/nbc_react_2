@@ -12,6 +12,7 @@ import {
   StFormBtn,
   StErrMsg
 } from './MainForm.style';
+import { letterLenLimit } from '../../constants';
 
 interface MainFormPropsTypes {
   member: MemberTypes;
@@ -38,6 +39,7 @@ const MainForm = ({ member }: MainFormPropsTypes) => {
 
   const onClickForm = async (e: React.FormEvent) => {
     const { name, content } = input;
+    const { min, max } = letterLenLimit;
     e.preventDefault();
 
     if (name === '') {
@@ -47,6 +49,14 @@ const MainForm = ({ member }: MainFormPropsTypes) => {
 
     if (content === '') {
       setErrMsg(() => ({ type: 'content', msg: '내용을을 입력하세요.' }));
+      return;
+    }
+
+    if (content.length < min || content.length > max) {
+      setErrMsg(() => ({
+        type: 'content',
+        msg: letterLenLimit.getErrMsg()
+      }));
       return;
     }
 
