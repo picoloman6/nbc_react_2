@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 
 import Main from './pages/Main';
 import NotFound from './pages/NotFound';
@@ -16,7 +16,7 @@ const App = () => {
   };
 
   return (
-    <Router>
+    <HashRouter>
       <React.Suspense>
         <Routes>
           <Route
@@ -27,7 +27,7 @@ const App = () => {
           <Route path='*' element={<NotFound />} />
         </Routes>
       </React.Suspense>
-    </Router>
+    </HashRouter>
   );
 };
 
