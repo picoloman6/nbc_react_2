@@ -15,7 +15,3 @@ export const StFanLetterWrapper = styled('li', {
 export const StFanLetterName = styled('h3', {
   fontSize: '1.5rem'
 });
-
-export const StDeleteBtn = styled('button', {
-  cursor: 'pointer'
-});

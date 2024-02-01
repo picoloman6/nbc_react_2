@@ -19,7 +19,7 @@ const Detail = () => {
   return (
     <>
       <DetailHeader name={state.name} />
-      <DetailLetter content={state.content} />
+      <DetailLetter content={state.content} id={state.id} />
     </>
   );
 };

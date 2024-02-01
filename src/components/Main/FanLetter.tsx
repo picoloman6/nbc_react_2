@@ -1,15 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { deleteFanLetter } from '../../apis/fanLetters';
-import { getLettersThunk } from '../../store/fanLetters';
-import { useThunkDispatch } from '../../store';
 import { LetterTypes } from '../../types/mainTypes';
-import {
-  StFanLetterWrapper,
-  StFanLetterName,
-  StDeleteBtn
-} from './FanLetter.style';
+import { StFanLetterWrapper, StFanLetterName } from './FanLetter.style';
 
 interface FanLetterPropsTypes {
   letter: LetterTypes;
@@ -27,7 +20,6 @@ const convertDate = (dateTime: number) => {
 };
 
 const FanLetter = ({ letter }: FanLetterPropsTypes) => {
-  const dipatch = useThunkDispatch();
   const navigate = useNavigate();
   const { id, name, content, dateTime } = letter;
 
@@ -39,11 +31,6 @@ const FanLetter = ({ letter }: FanLetterPropsTypes) => {
     }
   };
 
-  const onClickDelete = async (id: string) => {
-    await deleteFanLetter(id);
-    dipatch(getLettersThunk());
-  };
-
   return (
     <StFanLetterWrapper onClick={onClickDetail}>
       <StFanLetterName>{name}</StFanLetterName>
@@ -51,7 +38,6 @@ const FanLetter = ({ letter }: FanLetterPropsTypes) => {
       <span>
         {content.length > 35 ? `${content.slice(0, 35)}...` : content}
       </span>
-      <StDeleteBtn onClick={() => onClickDelete(id)}>삭제</StDeleteBtn>
     </StFanLetterWrapper>
   );
 };
