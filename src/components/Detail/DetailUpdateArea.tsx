@@ -1,10 +1,18 @@
 import { StDetailLetterWrapper } from './DetailLetter.style';
 import { StDetailTextArea } from './DetailUpdateArea.style';
 
-const DetailUpdateArea = () => {
+interface DetailUpdateAreaPropsTypes {
+  content: string;
+  onChangeNewContent: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+const DetailUpdateArea = ({
+  content,
+  onChangeNewContent
+}: DetailUpdateAreaPropsTypes) => {
   return (
     <StDetailLetterWrapper>
-      <StDetailTextArea />
+      <StDetailTextArea value={content} onChange={onChangeNewContent} />
     </StDetailLetterWrapper>
   );
 };

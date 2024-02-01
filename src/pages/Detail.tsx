@@ -10,13 +10,18 @@ import DetailUpdateArea from '../components/Detail/DetailUpdateArea';
 import DetailBtns from '../components/Detail/Detailbtns';
 
 const Detail = () => {
-  const [update, setUpdate] = useState<boolean>(false);
   const dipatch = useThunkDispatch();
   const { state } = useLocation();
   const navigate = useNavigate();
+  const [update, setUpdate] = useState<boolean>(false);
+  const [newContent, setNewContent] = useState<string>(state.content);
 
   const onClickChange = () => {
     setUpdate((prev) => !prev);
+  };
+
+  const onChangeNewContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setNewContent(() => e.target.value);
   };
 
   const onClickDelete = async () => {
@@ -36,7 +41,14 @@ const Detail = () => {
   return (
     <>
       <DetailHeader name={state.name} />
-      {update ? <DetailUpdateArea /> : <DetailLetter content={state.content} />}
+      {update ? (
+        <DetailUpdateArea
+          content={newContent}
+          onChangeNewContent={onChangeNewContent}
+        />
+      ) : (
+        <DetailLetter content={state.content} />
+      )}
       <DetailBtns onClickChange={onClickChange} onClickDelete={onClickDelete} />
     </>
   );

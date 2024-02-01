@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
@@ -6,7 +7,7 @@ import {
   StDetailHeaderName
 } from './DetailHeader.style';
 
-const DetailHeader = ({ name }: { name: string }) => {
+const DetailHeader = React.memo(({ name }: { name: string }) => {
   const navigate = useNavigate();
 
   const onClickGoBack = () => {
@@ -19,6 +20,6 @@ const DetailHeader = ({ name }: { name: string }) => {
       <StDetailHeaderName>From.{name}</StDetailHeaderName>
     </StDetailHeader>
   );
-};
+});
 
 export default DetailHeader;
