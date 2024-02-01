@@ -7,7 +7,7 @@ import { getLettersThunk } from '../store/fanLetters';
 import DetailHeader from '../components/Detail/DetailHeader';
 import DetailLetter from '../components/Detail/DetailLetter';
 import DetailUpdateArea from '../components/Detail/DetailUpdateArea';
-import DetailBtns from '../components/Detail/Detailbtns';
+import DetailBtns from '../components/Detail/DetailBtns';
 import { letterLenLimit } from '../constants';
 
 const Detail = () => {
@@ -16,11 +16,12 @@ const Detail = () => {
   const navigate = useNavigate();
 
   const [update, setUpdate] = useState<boolean>(false);
-  const [newContent, setNewContent] = useState<string>(state.content);
+  const [newContent, setNewContent] = useState<string>('');
   const [errMsg, setErrMsg] = useState<string>('');
 
   const onClickChange = () => {
     setUpdate((prev) => !prev);
+    setNewContent(() => state.content);
   };
 
   const onChangeNewContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -60,26 +61,28 @@ const Detail = () => {
     window.scrollTo(0, 0);
   }, [state, navigate]);
 
-  return (
-    <>
-      <DetailHeader name={state.name} />
-      {update ? (
-        <DetailUpdateArea
-          content={newContent}
-          onChangeNewContent={onChangeNewContent}
+  if (state) {
+    return (
+      <>
+        <DetailHeader name={state.name} />
+        {update ? (
+          <DetailUpdateArea
+            content={newContent}
+            onChangeNewContent={onChangeNewContent}
+          />
+        ) : (
+          <DetailLetter content={state.content} />
+        )}
+        <DetailBtns
+          update={update}
+          errMsg={errMsg}
+          onClickChange={onClickChange}
+          onClickUpdate={onClickUpdate}
+          onClickDelete={onClickDelete}
         />
-      ) : (
-        <DetailLetter content={state.content} />
-      )}
-      <DetailBtns
-        update={update}
-        errMsg={errMsg}
-        onClickChange={onClickChange}
-        onClickUpdate={onClickUpdate}
-        onClickDelete={onClickDelete}
-      />
-    </>
-  );
+      </>
+    );
+  }
 };
 
 export default Detail;
