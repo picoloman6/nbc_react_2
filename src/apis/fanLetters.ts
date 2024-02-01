@@ -2,6 +2,7 @@ import {
   getDocs,
   addDoc,
   deleteDoc,
+  updateDoc,
   query,
   collection,
   orderBy,
@@ -42,6 +43,16 @@ export const postFanLetters = async (input: LetterInputTypes) => {
 export const deleteFanLetter = async (id: string) => {
   try {
     await deleteDoc(doc(db, 'fan-letters', id));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const updateFanLetter = async (id: string, content: string) => {
+  try {
+    await updateDoc(doc(db, 'fan-letters', id), {
+      content
+    });
   } catch (e) {
     console.log(e);
   }

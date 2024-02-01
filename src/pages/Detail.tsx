@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useThunkDispatch } from '../store';
-import { deleteFanLetter } from '../apis/fanLetters';
+import { deleteFanLetter, updateFanLetter } from '../apis/fanLetters';
 import { getLettersThunk } from '../store/fanLetters';
 import DetailHeader from '../components/Detail/DetailHeader';
 import DetailLetter from '../components/Detail/DetailLetter';
@@ -13,6 +13,7 @@ const Detail = () => {
   const dipatch = useThunkDispatch();
   const { state } = useLocation();
   const navigate = useNavigate();
+
   const [update, setUpdate] = useState<boolean>(false);
   const [newContent, setNewContent] = useState<string>(state.content);
 
@@ -22,6 +23,13 @@ const Detail = () => {
 
   const onChangeNewContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewContent(() => e.target.value);
+  };
+
+  const onClickUpdate = async () => {
+    await updateFanLetter(state.id, newContent);
+    dipatch(getLettersThunk());
+    state.content = newContent;
+    setUpdate(() => false);
   };
 
   const onClickDelete = async () => {
@@ -49,7 +57,12 @@ const Detail = () => {
       ) : (
         <DetailLetter content={state.content} />
       )}
-      <DetailBtns onClickChange={onClickChange} onClickDelete={onClickDelete} />
+      <DetailBtns
+        update={update}
+        onClickChange={onClickChange}
+        onClickUpdate={onClickUpdate}
+        onClickDelete={onClickDelete}
+      />
     </>
   );
 };

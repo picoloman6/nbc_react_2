@@ -5,5 +5,6 @@ export const StDetailTextArea = styled('textarea', {
   height: '97%',
   resize: 'none',
   fontSize: '1.5rem',
-  lineHeight: '3rem'
+  lineHeight: '3rem',
+  border: 'none'
 });
