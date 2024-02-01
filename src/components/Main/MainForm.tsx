@@ -85,7 +85,7 @@ const MainForm = ({ member }: MainFormPropsTypes) => {
         placeholder='내용을 입력하세요'
         onChange={onChangeForm}
       />
-      <StFormBtn> 제출</StFormBtn>
+      <StFormBtn>제출</StFormBtn>
     </StForm>
   );
 };
