@@ -1,12 +1,29 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { useThunkDispatch } from '../store';
+import { deleteFanLetter } from '../apis/fanLetters';
+import { getLettersThunk } from '../store/fanLetters';
 import DetailHeader from '../components/Detail/DetailHeader';
 import DetailLetter from '../components/Detail/DetailLetter';
+import DetailUpdateArea from '../components/Detail/DetailUpdateArea';
+import DetailBtns from '../components/Detail/Detailbtns';
 
 const Detail = () => {
+  const [update, setUpdate] = useState<boolean>(false);
+  const dipatch = useThunkDispatch();
   const { state } = useLocation();
   const navigate = useNavigate();
+
+  const onClickChange = () => {
+    setUpdate((prev) => !prev);
+  };
+
+  const onClickDelete = async () => {
+    await deleteFanLetter(state.id);
+    dipatch(getLettersThunk());
+    navigate(-1);
+  };
 
   useEffect(() => {
     if (state === null) {
@@ -19,7 +36,8 @@ const Detail = () => {
   return (
     <>
       <DetailHeader name={state.name} />
-      <DetailLetter content={state.content} id={state.id} />
+      {update ? <DetailUpdateArea /> : <DetailLetter content={state.content} />}
+      <DetailBtns onClickChange={onClickChange} onClickDelete={onClickDelete} />
     </>
   );
 };
