@@ -16,6 +16,7 @@ const Detail = () => {
 
   const [update, setUpdate] = useState<boolean>(false);
   const [newContent, setNewContent] = useState<string>(state.content);
+  const [errMsg, setErrMsg] = useState<string>('');
 
   const onClickChange = () => {
     setUpdate((prev) => !prev);
@@ -26,10 +27,21 @@ const Detail = () => {
   };
 
   const onClickUpdate = async () => {
+    if (state.content === newContent) {
+      setErrMsg(() => '수정된 내용이 없습니다.');
+      return;
+    }
+
+    if (newContent.length < 10 || newContent.length > 200) {
+      setErrMsg(() => '10자 이상 200자 이하로 입력하세요.');
+      return;
+    }
+
     await updateFanLetter(state.id, newContent);
     dipatch(getLettersThunk());
     state.content = newContent;
     setUpdate(() => false);
+    setErrMsg(() => '');
   };
 
   const onClickDelete = async () => {
@@ -59,6 +71,7 @@ const Detail = () => {
       )}
       <DetailBtns
         update={update}
+        errMsg={errMsg}
         onClickChange={onClickChange}
         onClickUpdate={onClickUpdate}
         onClickDelete={onClickDelete}

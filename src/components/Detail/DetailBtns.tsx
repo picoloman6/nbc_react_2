@@ -1,7 +1,9 @@
+import { StErrMsg } from '../Main/MainForm.style';
 import { StDetailBtnWrapper, StDetailBtn } from './DetailBtns.style';
 
 interface DetailBtnsPropsTypes {
   update: boolean;
+  errMsg: string;
   onClickChange: () => void;
   onClickUpdate: () => void;
   onClickDelete: () => void;
@@ -9,6 +11,7 @@ interface DetailBtnsPropsTypes {
 
 const DetailBtns = ({
   update,
+  errMsg,
   onClickChange,
   onClickUpdate,
   onClickDelete
@@ -25,6 +28,7 @@ const DetailBtns = ({
       ) : (
         <StDetailBtn onClick={onClickDelete}>삭제</StDetailBtn>
       )}
+      <StErrMsg>{errMsg}</StErrMsg>
     </StDetailBtnWrapper>
   );
 };
