@@ -19,14 +19,15 @@ const DetailBtns = ({
   return (
     <StDetailBtnWrapper>
       {update ? (
-        <StDetailBtn onClick={onClickUpdate}>확인</StDetailBtn>
+        <>
+          <StDetailBtn onClick={onClickUpdate}>확인</StDetailBtn>
+          <StDetailBtn onClick={onClickChange}>취소</StDetailBtn>
+        </>
       ) : (
-        <StDetailBtn onClick={onClickChange}>수정</StDetailBtn>
-      )}
-      {update ? (
-        <StDetailBtn onClick={onClickChange}>취소</StDetailBtn>
-      ) : (
-        <StDetailBtn onClick={onClickDelete}>삭제</StDetailBtn>
+        <>
+          <StDetailBtn onClick={onClickChange}>수정</StDetailBtn>
+          <StDetailBtn onClick={onClickDelete}>삭제</StDetailBtn>
+        </>
       )}
       <StErrMsg>{errMsg}</StErrMsg>
     </StDetailBtnWrapper>
