@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { StErrMsg } from '../components/Main/MainForm.style';
 import { useThunkDispatch } from '../store';
 import { deleteFanLetter, updateFanLetter } from '../apis/fanLetters';
 import { getLettersThunk } from '../store/fanLetters';
@@ -10,6 +11,7 @@ import DetailUpdateArea from '../components/Detail/DetailUpdateArea';
 import DetailBtns from '../components/Detail/DetailBtns';
 import { ErrMsgTypes } from '../types/MainTypes';
 import { checkFormValue } from '../controllers/main';
+import { StDetailFooter } from './Detail.style';
 
 const Detail = () => {
   const dipatch = useThunkDispatch();
@@ -68,13 +70,15 @@ const Detail = () => {
         ) : (
           <DetailLetter content={state.content} />
         )}
-        <DetailBtns
-          isUpdate={isUpdate}
-          errMsg={errMsg}
-          changeUpdate={changeUpdate}
-          onClickUpdate={onClickUpdate}
-          onClickDelete={onClickDelete}
-        />
+        <StDetailFooter>
+          <DetailBtns
+            isUpdate={isUpdate}
+            changeUpdate={changeUpdate}
+            onClickUpdate={onClickUpdate}
+            onClickDelete={onClickDelete}
+          />
+          <StErrMsg>{errMsg.msg}</StErrMsg>
+        </StDetailFooter>
       </>
     );
   }

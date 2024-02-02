@@ -1,9 +1,7 @@
 import { styled } from '@stitches/react';
 
 export const StDetailBtnWrapper = styled('div', {
-  width: '30rem',
-  margin: '0 auto',
-  marginTop: '1rem'
+  width: '25%'
 });
 
 export const StDetailBtn = styled('button', {
