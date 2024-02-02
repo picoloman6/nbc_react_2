@@ -8,43 +8,38 @@ import DetailHeader from '../components/Detail/DetailHeader';
 import DetailLetter from '../components/Detail/DetailLetter';
 import DetailUpdateArea from '../components/Detail/DetailUpdateArea';
 import DetailBtns from '../components/Detail/DetailBtns';
-import { letterLenLimit } from '../constants';
+import { ErrMsgTypes } from '../types/MainTypes';
+import { checkFormValue } from '../controllers/main';
 
 const Detail = () => {
   const dipatch = useThunkDispatch();
   const { state } = useLocation();
   const navigate = useNavigate();
 
-  const [update, setUpdate] = useState<boolean>(false);
-  const [newContent, setNewContent] = useState<string>('');
-  const [errMsg, setErrMsg] = useState<string>('');
+  const [isUpdate, setIsUpdate] = useState<boolean>(false);
+  const [newContent, setNewContent] = useState<string>(state.content);
+  const [errMsg, setErrMsg] = useState<ErrMsgTypes>({ type: '', msg: '' });
 
-  const onClickChange = () => {
-    setUpdate((prev) => !prev);
-    setNewContent(() => state.content);
+  const changeUpdate = () => {
+    setIsUpdate((prev) => !prev);
   };
 
   const onChangeNewContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setNewContent(() => e.target.value);
+    setNewContent(e.target.value);
   };
 
   const onClickUpdate = async () => {
-    const { min, max } = letterLenLimit;
-    if (state.content === newContent) {
-      setErrMsg(() => '수정된 내용이 없습니다.');
-      return;
-    }
+    const checkResult = checkFormValue(state.name, newContent, state.content);
+    setErrMsg(checkResult);
 
-    if (newContent.length < min || newContent.length > max) {
-      setErrMsg(() => letterLenLimit.getErrMsg());
+    if (checkResult.type !== '') {
       return;
     }
 
     await updateFanLetter(state.id, newContent);
     dipatch(getLettersThunk());
     state.content = newContent;
-    setUpdate(() => false);
-    setErrMsg(() => '');
+    setIsUpdate(false);
   };
 
   const onClickDelete = async () => {
@@ -65,7 +60,7 @@ const Detail = () => {
     return (
       <>
         <DetailHeader name={state.name} />
-        {update ? (
+        {isUpdate ? (
           <DetailUpdateArea
             content={newContent}
             onChangeNewContent={onChangeNewContent}
@@ -74,9 +69,9 @@ const Detail = () => {
           <DetailLetter content={state.content} />
         )}
         <DetailBtns
-          update={update}
+          isUpdate={isUpdate}
           errMsg={errMsg}
-          onClickChange={onClickChange}
+          changeUpdate={changeUpdate}
           onClickUpdate={onClickUpdate}
           onClickDelete={onClickDelete}
         />

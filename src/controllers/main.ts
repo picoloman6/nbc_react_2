@@ -12,10 +12,18 @@ export const convertDate = (dateTime: number) => {
   return `${year}년 ${mon}월 ${date}일 ${hour}시 ${min}분`;
 };
 
-export const checkFormValue = (name: string, content: string): ErrMsgTypes => {
+export const checkFormValue = (
+  name: string,
+  content: string,
+  oldContent?: string
+): ErrMsgTypes => {
   const { min, max } = letterLenLimit;
   if (name === '') {
     return { type: 'name', msg: '이름을 입력하세요.' };
+  }
+
+  if (oldContent && content === oldContent) {
+    return { type: 'content', msg: '수정된 내용이 없습니다.' };
   }
 
   if (content === '') {
