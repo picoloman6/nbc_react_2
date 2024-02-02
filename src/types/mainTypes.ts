@@ -15,3 +15,20 @@ export interface LetterTypes extends LetterInputTypes {
   id: string;
   dateTime: number;
 }
+
+export interface ErrMsgTypes {
+  type: '' | 'name' | 'content';
+  msg: string;
+}
+
+export interface FormInputTypes {
+  name: string;
+  content: string;
+}
+
+export type ClickFormTypes = (
+  e: React.FormEvent,
+  name: string,
+  content: string,
+  setInput: React.Dispatch<React.SetStateAction<FormInputTypes>>
+) => void;

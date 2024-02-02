@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
-import { MemberTypes } from '../../types/mainTypes';
-import { getLettersThunk } from '../../store/fanLetters';
-import { useThunkDispatch } from '../../store';
-import { postFanLetters } from '../../apis/fanLetters';
+import {
+  ClickFormTypes,
+  ErrMsgTypes,
+  FormInputTypes,
+  MemberTypes
+} from '../../types/mainTypes';
 import {
   StForm,
   StFormTitle,
@@ -12,23 +14,15 @@ import {
   StFormBtn,
   StErrMsg
 } from './MainForm.style';
-import { letterLenLimit } from '../../constants';
 
 interface MainFormPropsTypes {
   member: MemberTypes;
+  errMsg: ErrMsgTypes;
+  onClickForm: ClickFormTypes;
 }
 
-const MainForm = ({ member }: MainFormPropsTypes) => {
-  const dispatch = useThunkDispatch();
-  const [input, setInput] = useState<{ name: string; content: string }>({
-    name: '',
-    content: ''
-  });
-
-  const [errMsg, setErrMsg] = useState<{
-    type: '' | 'name' | 'content';
-    msg: string;
-  }>({ type: '', msg: '' });
+const MainForm = ({ member, errMsg, onClickForm }: MainFormPropsTypes) => {
+  const [input, setInput] = useState<FormInputTypes>({ name: '', content: '' });
 
   const onChangeForm = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -37,39 +31,9 @@ const MainForm = ({ member }: MainFormPropsTypes) => {
     setInput((prev) => ({ ...prev, [name]: value }));
   };
 
-  const onClickForm = async (e: React.FormEvent) => {
-    const { name, content } = input;
-    const { min, max } = letterLenLimit;
-    e.preventDefault();
-
-    if (name === '') {
-      setErrMsg(() => ({ type: 'name', msg: '이름을 입력하세요.' }));
-      return;
-    }
-
-    if (content === '') {
-      setErrMsg(() => ({ type: 'content', msg: '내용을을 입력하세요.' }));
-      return;
-    }
-
-    if (content.length < min || content.length > max) {
-      setErrMsg(() => ({
-        type: 'content',
-        msg: letterLenLimit.getErrMsg()
-      }));
-      return;
-    }
-
-    await postFanLetters({ name, content, member });
-
-    dispatch(getLettersThunk());
-
-    setInput(() => ({ name: '', content: '' }));
-    setErrMsg(() => ({ type: '', msg: '' }));
-  };
-
   return (
-    <StForm onSubmit={onClickForm}>
+    <StForm
+      onSubmit={(e) => onClickForm(e, input.name, input.content, setInput)}>
       <StFormTitle>현재 {member}에게 보내고 있습니다</StFormTitle>
       <div>
         <label htmlFor='main-form-name'>닉네임</label>

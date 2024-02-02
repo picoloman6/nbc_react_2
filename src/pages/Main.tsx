@@ -1,11 +1,17 @@
-import { ReactElement, useEffect } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 import Header from '../components/Main/Header';
 import MainForm from '../components/Main/MainForm';
 import FanLetter from '../components/Main/FanLetter';
+
+import { postFanLetters } from '../apis/fanLetters';
 import { getLettersThunk } from '../store/fanLetters';
 import { RootState, useAppSelector, useThunkDispatch } from '../store';
-import { MemberTypes } from '../types/mainTypes';
+
+import { MemberTypes, ErrMsgTypes, ClickFormTypes } from '../types/mainTypes';
+
+import { StMainUl } from './Main.style';
+import { checkFormValue } from '../controllers/main';
 
 interface MainPropsTypes {
   member: MemberTypes;
@@ -16,6 +22,23 @@ const Main = ({ member, changeMember }: MainPropsTypes) => {
   const dispatch = useThunkDispatch();
   const data = useAppSelector((state: RootState) => state.letters);
 
+  const [errMsg, setErrMsg] = useState<ErrMsgTypes>({ type: '', msg: '' });
+
+  const onClickForm: ClickFormTypes = async (e, name, content, setInput) => {
+    e.preventDefault();
+
+    const checkResult = checkFormValue(name, content);
+    setErrMsg(checkResult);
+
+    if (checkResult.type !== '') {
+      return;
+    }
+
+    await postFanLetters({ name, content, member });
+    dispatch(getLettersThunk());
+    setInput({ name: '', content: '' });
+  };
+
   useEffect(() => {
     dispatch(getLettersThunk());
   }, [dispatch]);
@@ -23,8 +46,8 @@ const Main = ({ member, changeMember }: MainPropsTypes) => {
   return (
     <>
       <Header member={member} changeMember={changeMember} />
-      <MainForm member={member} />
-      <ul style={{ width: '30%', margin: '0 auto' }}>
+      <MainForm member={member} errMsg={errMsg} onClickForm={onClickForm} />
+      <StMainUl>
         {!data.loading &&
           data.letters.reduce(
             (acc: ReactElement[], cur) =>
@@ -33,7 +56,7 @@ const Main = ({ member, changeMember }: MainPropsTypes) => {
                 : acc,
             []
           )}
-      </ul>
+      </StMainUl>
     </>
   );
 };

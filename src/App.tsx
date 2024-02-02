@@ -12,7 +12,7 @@ const App = () => {
   const [member, setMember] = useState<MemberTypes>('카리나');
 
   const changeMember = (newMember: MemberTypes) => {
-    setMember(() => newMember);
+    setMember(newMember);
   };
 
   return (
