@@ -10,7 +10,7 @@ import { deleteFanLetter, updateFanLetter } from '../apis/fanLetters';
 import { getLettersThunk } from '../store/fanLetters';
 import { useThunkDispatch } from '../store';
 
-import { ErrMsgTypes } from '../types/MainTypes';
+import { ErrMsgTypes } from '../types/mainTypes';
 
 import { StErrMsg } from '../components/Main/MainForm.style';
 import { StDetailFooter } from './Detail.style';

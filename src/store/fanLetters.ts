@@ -6,7 +6,7 @@ import {
   createReducer
 } from 'typesafe-actions';
 
-import { LetterTypes } from '../types/MainTypes';
+import { LetterTypes } from '../types/mainTypes';
 import { getFanLetters } from '../apis/fanLetters';
 import { RootState } from '.';
 

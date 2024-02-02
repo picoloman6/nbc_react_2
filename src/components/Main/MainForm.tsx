@@ -5,7 +5,7 @@ import {
   ErrMsgTypes,
   FormInputTypes,
   MemberTypes
-} from '../../types/MainTypes';
+} from '../../types/mainTypes';
 import {
   StForm,
   StFormTitle,

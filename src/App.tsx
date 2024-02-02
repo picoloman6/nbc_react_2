@@ -3,7 +3,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 
 import Main from './pages/Main';
 import NotFound from './pages/NotFound';
-import { MemberTypes } from './types/MainTypes';
+import { MemberTypes } from './types/mainTypes';
 import './index.css';
 
 const Detail = React.lazy(() => import('./pages/Detail'));

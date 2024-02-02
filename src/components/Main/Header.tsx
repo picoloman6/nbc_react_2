@@ -1,5 +1,5 @@
 import SelectArea from './SelectArea.tsx';
-import { MemberStateTypes } from '../../types/MainTypes.ts';
+import { MemberStateTypes } from '../../types/mainTypes.ts';
 import { StHeaderWrapper, StHeaderTitle } from './Header.style';
 
 import { memo } from 'react';

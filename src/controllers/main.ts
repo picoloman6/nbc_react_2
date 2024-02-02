@@ -1,5 +1,5 @@
 import { letterLenLimit } from '../constants';
-import { ErrMsgTypes } from '../types/MainTypes';
+import { ErrMsgTypes } from '../types/mainTypes';
 
 export const convertDate = (dateTime: number) => {
   const dateObj = new Date(dateTime);
