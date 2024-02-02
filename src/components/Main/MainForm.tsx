@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {
   ClickFormTypes,
   ErrMsgTypes,
-  FormInputTypes,
+  LetterInputTypes,
   MemberTypes
 } from '../../types/mainTypes';
 import {
@@ -22,7 +22,10 @@ interface MainFormPropsTypes {
 }
 
 const MainForm = ({ member, errMsg, onClickForm }: MainFormPropsTypes) => {
-  const [input, setInput] = useState<FormInputTypes>({ name: '', content: '' });
+  const [input, setInput] = useState<LetterInputTypes>({
+    name: '',
+    content: ''
+  });
 
   const onChangeForm = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -45,7 +48,7 @@ const MainForm = ({ member, errMsg, onClickForm }: MainFormPropsTypes) => {
         name='name'
         value={input.name}
         placeholder='이름을 입력하세요'
-        autoComplete='none'
+        autoComplete='off'
         onChange={onChangeForm}
       />
       <div>

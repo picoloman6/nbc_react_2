@@ -8,7 +8,7 @@ export interface MemberStateTypes {
 export interface LetterInputTypes {
   name: string;
   content: string;
-  member: string;
+  member?: string;
 }
 
 export interface LetterTypes extends LetterInputTypes {
@@ -21,14 +21,9 @@ export interface ErrMsgTypes {
   msg: string;
 }
 
-export interface FormInputTypes {
-  name: string;
-  content: string;
-}
-
 export type ClickFormTypes = (
   e: React.FormEvent,
   name: string,
   content: string,
-  setInput: React.Dispatch<React.SetStateAction<FormInputTypes>>
+  setInput: React.Dispatch<React.SetStateAction<LetterInputTypes>>
 ) => void;
