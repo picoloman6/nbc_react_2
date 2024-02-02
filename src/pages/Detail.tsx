@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { StErrMsg } from '../components/Main/MainForm.style';
-import { useThunkDispatch } from '../store';
-import { deleteFanLetter, updateFanLetter } from '../apis/fanLetters';
-import { getLettersThunk } from '../store/fanLetters';
 import DetailHeader from '../components/Detail/DetailHeader';
 import DetailLetter from '../components/Detail/DetailLetter';
 import DetailUpdateArea from '../components/Detail/DetailUpdateArea';
 import DetailBtns from '../components/Detail/DetailBtns';
+
+import { deleteFanLetter, updateFanLetter } from '../apis/fanLetters';
+import { getLettersThunk } from '../store/fanLetters';
+import { useThunkDispatch } from '../store';
+
 import { ErrMsgTypes } from '../types/MainTypes';
-import { checkFormValue } from '../controllers/main';
+
+import { StErrMsg } from '../components/Main/MainForm.style';
 import { StDetailFooter } from './Detail.style';
+
+import { checkFormValue } from '../controllers/main';
 
 const Detail = () => {
   const dipatch = useThunkDispatch();

@@ -10,25 +10,21 @@ import {
 } from 'firebase/firestore/lite';
 
 import db from './firestore';
-import { LetterInputTypes } from '../types/MainTypes';
+import { LetterInputTypes, LetterTypes } from '../types/MainTypes';
 
 export const getFanLetters = async () => {
-  try {
-    const comment = query(
-      collection(db, 'fan-letters'),
-      orderBy('dateTime', 'desc')
-    );
-    const res = await getDocs(comment);
-    const data = res.docs.map((v) => {
-      const tmp = v.data();
-      tmp.id = v.id;
-      return tmp;
-    });
+  const comment = query(
+    collection(db, 'fan-letters'),
+    orderBy('dateTime', 'desc')
+  );
+  const res = await getDocs(comment);
+  const data = res.docs.map((v) => {
+    const tmp = v.data();
+    tmp.id = v.id;
+    return tmp;
+  }) as LetterTypes[];
 
-    return data;
-  } catch (e) {
-    console.log(e);
-  }
+  return data;
 };
 
 export const postFanLetters = async (input: LetterInputTypes) => {

@@ -36,7 +36,7 @@ export const getLettersThunk =
     const { request, success, failure } = getDataAsync;
     dispatch(request());
     try {
-      const letters = (await getFanLetters()) as LetterTypes[];
+      const letters = await getFanLetters();
       dispatch(success(letters));
     } catch (e) {
       dispatch(failure(e));
