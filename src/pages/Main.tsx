@@ -8,10 +8,10 @@ import { postFanLetters } from '../apis/fanLetters';
 import { getLettersThunk } from '../store/fanLetters';
 import { RootState, useAppSelector, useThunkDispatch } from '../store';
 
-import { MemberTypes, ErrMsgTypes, ClickFormTypes } from '../types/mainTypes';
+import { MemberTypes, ErrMsgTypes, ClickFormTypes } from '../types';
 
 import { StMainUl } from './Main.style';
-import { checkFormValue } from '../controllers/main';
+import { checkFormValue } from '../controllers';
 
 interface MainPropsTypes {
   member: MemberTypes;

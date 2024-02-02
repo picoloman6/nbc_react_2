@@ -10,12 +10,12 @@ import { deleteFanLetter, updateFanLetter } from '../apis/fanLetters';
 import { getLettersThunk } from '../store/fanLetters';
 import { useThunkDispatch } from '../store';
 
-import { ErrMsgTypes } from '../types/mainTypes';
+import { ErrMsgTypes } from '../types';
 
 import { StErrMsg } from '../components/Main/MainForm.style';
 import { StDetailFooter } from './Detail.style';
 
-import { checkFormValue } from '../controllers/main';
+import { checkFormValue } from '../controllers';
 
 const Detail = () => {
   const dipatch = useThunkDispatch();

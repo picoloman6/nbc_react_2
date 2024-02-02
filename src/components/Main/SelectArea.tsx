@@ -1,4 +1,4 @@
-import { MemberTypes, MemberStateTypes } from '../../types/mainTypes';
+import { MemberTypes, MemberStateTypes } from '../../types';
 import { StSelectWrapper, StSelectBtnWrapper } from './SelectArea.style';
 
 interface SelectBtnPropsTypes extends MemberStateTypes {
