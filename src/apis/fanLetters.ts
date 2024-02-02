@@ -10,7 +10,7 @@ import {
 } from 'firebase/firestore/lite';
 
 import db from './firestore';
-import { LetterInputTypes } from '../types/mainTypes';
+import { LetterInputTypes } from '../types/MainTypes';
 
 export const getFanLetters = async () => {
   try {

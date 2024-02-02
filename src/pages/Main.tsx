@@ -8,7 +8,7 @@ import { postFanLetters } from '../apis/fanLetters';
 import { getLettersThunk } from '../store/fanLetters';
 import { RootState, useAppSelector, useThunkDispatch } from '../store';
 
-import { MemberTypes, ErrMsgTypes, ClickFormTypes } from '../types/mainTypes';
+import { MemberTypes, ErrMsgTypes, ClickFormTypes } from '../types/MainTypes';
 
 import { StMainUl } from './Main.style';
 import { checkFormValue } from '../controllers/main';
