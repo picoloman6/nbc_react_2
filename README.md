@@ -6,6 +6,7 @@
 - 기간 : 24.01.25. ~ 24.02.01(3일)
 - 주소 : https://picoloman6.github.io/nbc_react_2_fan_letter/
 - 로컬 : firestorage key로 .env 생성 -> yarn dev
+- 업그레이드 버전 깃허브 링크(로그인 기능 추가) : https://github.com/picoloman6/nbc_react_3_fan_letter2
 
 ## ⚙️ 개발 환경
 
